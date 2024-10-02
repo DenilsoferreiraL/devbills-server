@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { CategoryiesController } from "../controllers/categories.controller";
+import { CategoriesController } from "../controllers/categories.controller";
 
 export const categoriesRoutes = Router()
 
-const controller = new CategoryiesController
+const controller = new CategoriesController
 
 categoriesRoutes.post('/', controller.create)
