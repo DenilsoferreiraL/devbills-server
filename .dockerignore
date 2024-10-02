@@ -1,0 +1,23 @@
+# Ignorar node_modules (não precisa ser copiado para a imagem)
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignorar logs
+*.log
+
+# Ignorar arquivos e diretórios relacionados ao Git
+.git
+.gitignore
+
+# Ignorar configurações do editor de código
+.vscode
+.idea
+
+# Ignorar Dockerfile e docker-compose.yml (não precisam ser copiados para dentro do container)
+Dockerfile
+docker-compose.yml
+
+# Ignorar arquivos sensíveis ou de configuração local
+.env
