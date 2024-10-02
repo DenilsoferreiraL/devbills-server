@@ -1,7 +1,13 @@
+import 'dotenv/config'
 import express, { json } from 'express'
 import { routes } from './routes'
+import { setupMongo } from './database'
 
-const app = express()
-app.use(routes)
-app.use(json())
-app.listen(3333, () => console.log('Started server'))
+setupMongo().then(() => {
+    const app = express()
+
+    app.use(json())
+    app.use(routes)
+
+    app.listen(3333, () => console.log('Started server'))
+})
