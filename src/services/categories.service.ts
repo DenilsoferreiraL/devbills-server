@@ -1,6 +1,7 @@
 import { CategoriesRepository } from "../database/repositories/categories.repository";
 import { CreateCategoryDTO } from "../dtos/categories.dto";
 import { Category } from "../entities/category.entity";
+import { AppError } from "../errors/app.error";
 
 export class CategoriesService {
 
@@ -10,7 +11,7 @@ export class CategoriesService {
         const foundCategory = await this.categoriesRepository.findByTitle(title)
 
         if (foundCategory) {
-            throw new Error('Category already exists')
+            throw new AppError('Category already exists', 400)
         }
         const category = new Category({
             title,
