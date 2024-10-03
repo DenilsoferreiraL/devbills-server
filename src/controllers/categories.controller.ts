@@ -4,18 +4,11 @@ import { CategoriesRepository } from "../database/repositories/categories.reposi
 import { CategoryModel } from "../database/schemas/category.schema";
 import { CreateCategoryDTO } from "../dtos/categories.dto";
 import { z } from "zod";
+import { StatusCodes } from "http-status-codes";
 export class CategoriesController {
     async create(req: Request<unknown, unknown, CreateCategoryDTO>, res: Response, next: NextFunction) {
 
         try {
-
-            const validadeSchema = z.object({
-                title: z.string(),
-                color: z.string().regex(/^#[A-Fa-f0-9]{6}$/)
-            })
-
-            validadeSchema.parse(req.body)
-
             const { title, color } = req.body
 
             const repository = new CategoriesRepository(CategoryModel)
@@ -23,7 +16,7 @@ export class CategoriesController {
 
             const result = await service.create({ title, color })
 
-            return res.status(201).json(result)
+            return res.status(StatusCodes.CREATED).json(result)
         } catch (err) {
             next(err)
         }
