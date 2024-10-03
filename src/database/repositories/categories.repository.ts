@@ -10,5 +10,11 @@ export class CategoriesRepository {
         const createdCategory = await this.model.create({ color, title })
 
         return createdCategory.toObject<Category>()
+
+    }
+    async findByTitle(title: string): Promise<Category | undefined> {
+        const category = await this.model.findOne({ title })
+
+        return category?.toObject<Category>()
     }
 }
