@@ -17,4 +17,12 @@ export class CategoriesRepository {
 
         return category?.toObject<Category>()
     }
+
+    async index(): Promise<Category[]> {
+        const categories = await this.model.find()
+
+        const categoriesMap = categories.map((item) => item.toObject<Category>())
+
+        return categoriesMap
+    }
 }

@@ -5,7 +5,9 @@ import { createCategorySchema } from "../dtos/categories.dto";
 
 export const categoriesRoutes = Router()
 
-const controller = new CategoriesController
+const controller = new CategoriesController()
+
+categoriesRoutes.get('/', controller.index)
 
 categoriesRoutes.post('/', Validator({
     schema: createCategorySchema,
