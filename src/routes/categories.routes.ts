@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { CategoriesController } from "../controllers/categories.controller";
-import { ParamsType, Validator } from "../middlewares/validator.middlewere";
+import { ParamsType, Validator } from "../middlewares/validator.middleware";
 import { createCategorySchema } from "../dtos/categories.dto";
 
 export const categoriesRoutes = Router()
