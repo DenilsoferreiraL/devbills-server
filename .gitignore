@@ -6,3 +6,5 @@ package-lock.json
 
 # Ignorar o arquivo .env
 .env
+
+README
