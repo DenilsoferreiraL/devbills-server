@@ -23,8 +23,8 @@ export class Transaction {
     constructor({ _id, amount, date, category, type }: TransactionProps) {
         this._id = _id,
             this.amount = amount,
-            this.date = date,
-            this.category = category,
+            this.date = new Date(date),
+            this.category = new Category(category),
             this.type = type
 
 
