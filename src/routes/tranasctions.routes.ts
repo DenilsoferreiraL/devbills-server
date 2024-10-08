@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { ParamsType, Validator } from "../middlewares/validator.middleware"
-import { createTransactionsSchema } from "../dtos/transactions.dto"
+import { createTransactionSchema } from "../dtos/transactions.dto"
 import { TransactionController } from "../controllers/transactions.controller"
 import { TransactionsFactory } from "../factories/transactions.factory"
 
@@ -12,6 +12,6 @@ const controller = new TransactionController(
 )
 
 tranasctionsRoutes.post('/', Validator({
-    schema: createTransactionsSchema,
+    schema: createTransactionSchema,
     type: ParamsType.BODY
 }), controller.create)

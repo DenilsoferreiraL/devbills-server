@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { TransactionType } from "../entities/transactions.entity"
 
-export const createTransactionsSchema = {
+export const createTransactionSchema = {
     title: z.string(),
     amount: z.number().int().positive(),
     type: z.nativeEnum(TransactionType),
@@ -9,6 +9,6 @@ export const createTransactionsSchema = {
     categoryId: z.string()
 }
 
-const createTransactionObject = z.object(createTransactionsSchema)
+const createTransactionObject = z.object(createTransactionSchema)
 
 export type CreateTransactionDTO = z.infer<typeof createTransactionObject>;
