@@ -7,7 +7,6 @@ export const TransactionSchema = new mongoose.Schema({
     type: String,
     date: Date,
     category: CategorySchema
-}, { versionKey: false }
-)
+}, { versionKey: false });
 
-export const TransactionModel = mongoose.model('Transaction', TransactionSchema)
+export const TransactionModel = mongoose.model('Transaction', TransactionSchema);
