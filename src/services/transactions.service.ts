@@ -3,7 +3,7 @@ import { TransactionsRepository } from "../database/repositories/transactions.re
 export class TransactionsService {
     constructor(private TransactionsRepository: TransactionsRepository) { }
 
-    async create(): Promise<Transaction> {
+    async create({ }: CreateTransactionDTO): Promise<Transaction> {
 
     }
 }

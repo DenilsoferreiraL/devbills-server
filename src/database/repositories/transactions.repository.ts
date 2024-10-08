@@ -6,8 +6,8 @@ export class TransactionsRepository {
 
     }
 
-    async create(): Promise<Transaction> {
-        const createdTransaction = await this.model.create({})
+    async create({ title, date, amount, category }: Transaction): Promise<Transaction> {
+        const createdTransaction = await this.model.create({ title, date, amount, category })
 
         return createdTransaction.toObject<Transaction>()
 
