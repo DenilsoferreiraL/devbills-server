@@ -15,3 +15,5 @@ tranasctionsRoutes.post('/', Validator({
     schema: createTransactionSchema,
     type: ParamsType.BODY
 }), controller.create)
+
+tranasctionsRoutes.get('/', controller.index)
