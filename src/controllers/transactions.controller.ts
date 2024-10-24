@@ -20,14 +20,15 @@ export class TransactionController {
         }
     }
 
-    // index = async (_: Request, res: Response, next: NextFunction) => {
 
-    //     try {
-    //         const result = await this.transactionsService.index()
+    index = async (req: Request, res: Response, next: NextFunction) => {
 
-    //         return res.status(StatusCodes.OK).json(result)
-    //     } catch (err) {
-    //         next(err)
-    //     }
-    // }
+        try {
+            const result = await this.transactionsService.index()
+
+            return res.status(StatusCodes.OK).json(result)
+        } catch (err) {
+            next(err)
+        }
+    }
 }
