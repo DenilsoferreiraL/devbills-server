@@ -38,14 +38,18 @@ export class TransactionsRepository {
 
 
     async getBalance({ beginDate, endDate }: GetDashboardDTO): Promise<Balance> {
-        const result = await this.model
-            .aggregate<Balance>()
-            .match({
+        const aggregate = this.model.aggregate<Balance>()
+
+        if (beginDate || endDate) {
+            aggregate.match({
                 date: {
-                    $gte: beginDate,
-                    $lte: endDate,
-                },
+                    ...(beginDate && { $gte: beginDate }),
+                    ...(endDate && { $lte: endDate }),
+                }
             })
+        }
+
+        const [result] = await aggregate
             .project({
                 _id: 0,
                 income: {
@@ -74,7 +78,7 @@ export class TransactionsRepository {
                 },
             });
 
-        return result[0]
+        return result
     }
 }
 
