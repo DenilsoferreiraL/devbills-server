@@ -29,7 +29,11 @@ export class TransactionsRepository {
             }
         }
 
-        const transactions = await this.model.find(whereParams)
+        const transactions = await this.model.find(whereParams, undefined, {
+            sort: {
+                date: -1
+            },
+        })
 
         const transactionsMap = transactions.map((item) => item.toObject<Transaction>())
 
