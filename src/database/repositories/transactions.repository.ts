@@ -1,4 +1,5 @@
 import { GetDashboardDTO, IndexTransactionsDTO } from "../../dtos/transactions.dto"
+import { Balance } from "../../entities/balance.entity"
 import { Transaction } from "../../entities/transactions.entity"
 import { TransactionModel } from "../schemas/transactions.schema"
 
@@ -36,53 +37,44 @@ export class TransactionsRepository {
     }
 
 
-    async getBalance({ beginDate, endDate }: GetDashboardDTO) {
-        const result = await this.model.aggregate([
-            {
-                $match: {
-                    date: {
-                        $gte: beginDate,
-                        $lte: endDate,
-                    }
-                }
-            },
-            {
-                $project: {
-                    _id: 0,
-                    income: {
-                        $cond: [
-                            { $eq: ["$type", "income"] },
-                            "$amount",
-                            0
-                        ]
-                    },
-                    expense: {
-                        $cond: [
-                            { $eq: ["$type", "expense"] },
-                            "$amount",
-                            0
-                        ]
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    incomes: { $sum: "$income" },
-                    expenses: { $sum: "$expense" }
-                }
-            },
-            {
-                $addFields: {
-                    balance: {
-                        $subtract: ['$incomes', '$expenses']
-                    }
-                }
-            }
-        ]);
+    async getBalance({ beginDate, endDate }: GetDashboardDTO): Promise<Balance> {
+        const result = await this.model
+            .aggregate<Balance>()
+            .match({
+                date: {
+                    $gte: beginDate,
+                    $lte: endDate,
+                },
+            })
+            .project({
+                _id: 0,
+                income: {
+                    $cond: [
+                        { $eq: ["$type", "income"] },
+                        "$amount",
+                        0,
+                    ],
+                },
+                expense: {
+                    $cond: [
+                        { $eq: ["$type", "expense"] },
+                        "$amount",
+                        0,
+                    ],
+                },
+            })
+            .group({
+                _id: null,
+                incomes: { $sum: "$income" },
+                expenses: { $sum: "$expense" },
+            })
+            .addFields({
+                balance: {
+                    $subtract: ["$incomes", "$expenses"],
+                },
+            });
 
-        return result;
-
+        return result[0]
     }
-
 }
+
