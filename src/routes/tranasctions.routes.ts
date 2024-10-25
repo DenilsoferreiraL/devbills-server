@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { ParamsType, Validator } from "../middlewares/validator.middleware"
-import { createTransactionSchema, getDashboardSchema } from "../dtos/transactions.dto"
+import { createTransactionSchema, getDashboardSchema, indexTransactionSchema } from "../dtos/transactions.dto"
 import { TransactionController } from "../controllers/transactions.controller"
 import { TransactionsFactory } from "../factories/transactions.factory"
 
@@ -16,7 +16,10 @@ tranasctionsRoutes.post('/', Validator({
     type: ParamsType.BODY
 }), controller.create)
 
-tranasctionsRoutes.get('/', controller.index)
+tranasctionsRoutes.get('/', Validator({
+    schema: indexTransactionSchema,
+    type: ParamsType.QUERY
+}), controller.index)
 
 tranasctionsRoutes.get('/', Validator({
     schema: getDashboardSchema,
