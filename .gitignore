@@ -1,5 +1,6 @@
 # Ignorar toda a pasta node_modules
 node_modules/
+.bin
 
 # Ignorar o arquivo package-lock.json
 package-lock.json
