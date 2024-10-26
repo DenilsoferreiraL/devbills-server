@@ -115,5 +115,6 @@ export class TransactionsRepository {
 
         return result
     }
+
 }
 
