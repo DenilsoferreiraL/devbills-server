@@ -101,7 +101,7 @@ export class TransactionsRepository {
         }
 
         const result = await aggregate.match(matchParams).group({
-            _id: 'category._id',
+            _id: '$category._id',
             title: {
                 $first: '$category.title'
             },
