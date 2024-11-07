@@ -9,7 +9,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: 'devbills'
       MONGO_INITDB_ROOT_PASSWORD: 'pass123'
     ports:
-      - '27017:27017'  
+      - '27017:27017'
     networks:
       - local
 
@@ -21,9 +21,11 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./:/home/app
+      # Monta o código-fonte, mas ignora o node_modules
+      - .:/home/app
+      - /home/app/node_modules
     ports:
-      - '3333:3333'  
+      - '3333:3333'
     networks:
       - local
 
