@@ -5,28 +5,28 @@ import { TransactionController } from "../controllers/transactions.controller"
 import { TransactionsFactory } from "../factories/transactions.factory"
 
 
-export const tranasctionsRoutes = Router()
+export const transactionsRoutes = Router()
 
 const controller = new TransactionController(
     TransactionsFactory.getServiceInstance()
 )
 
-tranasctionsRoutes.post('/', Validator({
+transactionsRoutes.post('/', Validator({
     schema: createTransactionSchema,
     type: ParamsType.BODY
 }), controller.create)
 
-tranasctionsRoutes.get('/', Validator({
+transactionsRoutes.get('/', Validator({
     schema: indexTransactionSchema,
     type: ParamsType.QUERY
 }), controller.index)
 
-tranasctionsRoutes.get('/dashboard', Validator({
+transactionsRoutes.get('/dashboard', Validator({
     schema: getDashboardSchema,
     type: ParamsType.QUERY
 }), controller.getDashboard)
 
-tranasctionsRoutes.get('/financial-evolution', Validator({
+transactionsRoutes.get('/financial-evolution', Validator({
     schema: getFinancialEvolutionSchema,
     type: ParamsType.QUERY
 }), controller.getFinancialEvolution)
