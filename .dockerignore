@@ -11,6 +11,7 @@ yarn-error.log
 .git
 .gitignore
 
+
 # Ignorar configurações do editor de código
 .vscode
 .idea
